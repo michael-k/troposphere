@@ -327,8 +327,8 @@ map_type = {
     'Integer': 'integer',
     'Json': 'dict',
     'Long': 'integer',
-    'String': 'basestring',
-    'Timestamp': 'basestring',
+    'String': 'str',
+    'Timestamp': 'str',
 }
 
 
