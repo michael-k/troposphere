@@ -25,20 +25,20 @@ class ResourcePolicy(AWSObject):
     resource_type = "AWS::SecretsManager::ResourcePolicy"
 
     props = {
-        'SecretId': (basestring, True),
+        'SecretId': (str, True),
         'ResourcePolicy': (policytypes, True),
     }
 
 
 class HostedRotationLambda(AWSProperty):
     props = {
-        'KmsKeyArn': (basestring, False),
-        'MasterSecretArn': (basestring, False),
-        'MasterSecretKmsKeyArn': (basestring, False),
-        'RotationLambdaName': (basestring, False),
-        'RotationType': (basestring, True),
-        'VpcSecurityGroupIds': (basestring, False),
-        'VpcSubnetIds': (basestring, False),
+        'KmsKeyArn': (str, False),
+        'MasterSecretArn': (str, False),
+        'MasterSecretKmsKeyArn': (str, False),
+        'RotationLambdaName': (str, False),
+        'RotationType': (str, True),
+        'VpcSecurityGroupIds': (str, False),
+        'VpcSubnetIds': (str, False),
     }
 
 
@@ -53,24 +53,24 @@ class RotationSchedule(AWSObject):
 
     props = {
         'HostedRotationLambda': (HostedRotationLambda, False),
-        'RotationLambdaARN': (basestring, False),
+        'RotationLambdaARN': (str, False),
         'RotationRules': (RotationRules, False),
-        'SecretId': (basestring, True),
+        'SecretId': (str, True),
     }
 
 
 class GenerateSecretString(AWSProperty):
     props = {
-        'ExcludeCharacters': (basestring, False),
+        'ExcludeCharacters': (str, False),
         'ExcludeLowercase': (boolean, False),
         'ExcludeNumbers': (boolean, False),
         'ExcludePunctuation': (boolean, False),
         'ExcludeUppercase': (boolean, False),
-        'GenerateStringKey': (basestring, False),
+        'GenerateStringKey': (str, False),
         'IncludeSpace': (boolean, False),
         'PasswordLength': (integer, False),
         'RequireEachIncludedType': (boolean, False),
-        'SecretStringTemplate': (basestring, False),
+        'SecretStringTemplate': (str, False),
     }
 
 
@@ -78,11 +78,11 @@ class Secret(AWSObject):
     resource_type = "AWS::SecretsManager::Secret"
 
     props = {
-        'Description': (basestring, False),
+        'Description': (str, False),
         'GenerateSecretString': (GenerateSecretString, False),
-        'KmsKeyId': (basestring, False),
-        'Name': (basestring, False),
-        'SecretString': (basestring, False),
+        'KmsKeyId': (str, False),
+        'Name': (str, False),
+        'SecretString': (str, False),
         'Tags': ((Tags, list), False),
     }
 
@@ -91,7 +91,7 @@ class SecretTargetAttachment(AWSObject):
     resource_type = "AWS::SecretsManager::SecretTargetAttachment"
 
     props = {
-        'SecretId': (basestring, True),
-        'TargetId': (basestring, True),
+        'SecretId': (str, True),
+        'TargetId': (str, True),
         'TargetType': (validate_target_types, True),
     }

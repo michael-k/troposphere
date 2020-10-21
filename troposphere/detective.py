@@ -17,8 +17,8 @@ class MemberInvitation(AWSObject):
     resource_type = "AWS::Detective::MemberInvitation"
 
     props = {
-        'GraphArn': (basestring, True),
-        'MemberEmailAddress': (basestring, True),
-        'MemberId': (basestring, True),
-        'Message': (basestring, False),
+        'GraphArn': (str, True),
+        'MemberEmailAddress': (str, True),
+        'MemberId': (str, True),
+        'Message': (str, False),
     }

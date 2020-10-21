@@ -27,8 +27,8 @@ def validate_action_on_failure(action_on_failure):
 
 class KeyValue(AWSProperty):
     props = {
-        'Key': (basestring, True),
-        'Value': (basestring, True)
+        'Key': (str, True),
+        'Value': (str, True)
     }
 
     def __init__(self, key=None, value=None, **kwargs):
@@ -47,10 +47,10 @@ def additional_info_validator(xs):
     if not isinstance(xs, dict):
         raise ValueError("AdditionalInfo must be a dict of "
                          "string to string pairs")
-    for k, v in xs.iteritems():
-        if not isinstance(k, basestring):
+    for k, v in xs.items():
+        if not isinstance(k, str):
             raise ValueError('AdditionalInfo keys must be strings')
-        if not isinstance(v, basestring):
+        if not isinstance(v, str):
             raise ValueError('AdditionalInfo values must be strings')
 
     return xs
@@ -60,7 +60,7 @@ class SecurityConfiguration(AWSObject):
     resource_type = "AWS::EMR::SecurityConfiguration"
 
     props = {
-        'Name': (basestring, False),
+        'Name': (str, False),
         'SecurityConfiguration': (dict, True)
     }
 
@@ -68,22 +68,22 @@ class SecurityConfiguration(AWSObject):
 class Application(AWSProperty):
     props = {
         'AdditionalInfo': (additional_info_validator, False),
-        'Args': ([basestring], False),
-        'Name': (basestring, False),
-        'Version': (basestring, False)
+        'Args': ([str], False),
+        'Name': (str, False),
+        'Version': (str, False)
     }
 
 
 class ScriptBootstrapActionConfig(AWSProperty):
     props = {
-        'Args': ([basestring], False),
-        'Path': (basestring, True)
+        'Args': ([str], False),
+        'Path': (str, True)
     }
 
 
 class BootstrapActionConfig(AWSProperty):
     props = {
-        'Name': (basestring, True),
+        'Name': (str, True),
         'ScriptBootstrapAction': (ScriptBootstrapActionConfig, True)
     }
 
@@ -92,10 +92,10 @@ def properties_validator(xs):
     if not isinstance(xs, dict):
         raise ValueError("ConfigurationProperties must be a dict of "
                          "string to string pairs")
-    for k, v in xs.iteritems():
-        if not isinstance(k, basestring):
+    for k, v in xs.items():
+        if not isinstance(k, str):
             raise ValueError('ConfigurationProperties keys must be strings')
-        if not isinstance(v, basestring) and not isinstance(v, AWSHelperFn):
+        if not isinstance(v, str) and not isinstance(v, AWSHelperFn):
             raise ValueError('ConfigurationProperties values must be strings'
                              ' or helper functions')
 
@@ -104,7 +104,7 @@ def properties_validator(xs):
 
 class Configuration(AWSProperty):
     props = {
-        'Classification': (basestring, False),
+        'Classification': (str, False),
         'ConfigurationProperties': (properties_validator, False)
     }
 
@@ -161,15 +161,15 @@ class ScalingConstraints(AWSProperty):
 
 class CloudWatchAlarmDefinition(AWSProperty):
     props = {
-        'ComparisonOperator': (basestring, True),
+        'ComparisonOperator': (str, True),
         'Dimensions': ([MetricDimension], False),
         'EvaluationPeriods': (positive_integer, False),
-        'MetricName': (basestring, True),
-        'Namespace': (basestring, False),
+        'MetricName': (str, True),
+        'Namespace': (str, False),
         'Period': (positive_integer, True),
-        'Statistic': (basestring, False),
+        'Statistic': (str, False),
         'Threshold': (positive_integer, True),
-        'Unit': (basestring, False),
+        'Unit': (str, False),
     }
 
 
@@ -181,7 +181,7 @@ class ScalingTrigger(AWSProperty):
 
 class SimpleScalingPolicyConfiguration(AWSProperty):
     props = {
-        'AdjustmentType': (basestring, False),
+        'AdjustmentType': (str, False),
         'CoolDown': (positive_integer, False),
         'ScalingAdjustment': (defer, True),
     }
@@ -234,8 +234,8 @@ class ScalingAction(AWSProperty):
 class ScalingRule(AWSProperty):
     props = {
         'Action': (ScalingAction, True),
-        'Description': (basestring, False),
-        'Name': (basestring, True),
+        'Description': (str, False),
+        'Name': (str, True),
         'Trigger': (ScalingTrigger, True),
     }
 
@@ -250,20 +250,20 @@ class AutoScalingPolicy(AWSProperty):
 class InstanceGroupConfigProperty(AWSProperty):
     props = {
         'AutoScalingPolicy': (AutoScalingPolicy, False),
-        'BidPrice': (basestring, False),
+        'BidPrice': (str, False),
         'Configurations': ([Configuration], False),
         'EbsConfiguration': (EbsConfiguration, False),
         'InstanceCount': (positive_integer, True),
-        'InstanceType': (basestring, True),
+        'InstanceType': (str, True),
         'Market': (market_validator, False),
-        'Name': (basestring, False),
+        'Name': (str, False),
     }
 
 
 class SpotProvisioningSpecification(AWSProperty):
     props = {
         'BlockDurationMinutes': (positive_integer, False),
-        'TimeoutAction': (basestring, True),
+        'TimeoutAction': (str, True),
         'TimeoutDurationMinutes': (positive_integer, True),
     }
 
@@ -276,11 +276,11 @@ class InstanceFleetProvisioningSpecifications(AWSProperty):
 
 class InstanceTypeConfig(AWSProperty):
     props = {
-        'BidPrice': (basestring, False),
-        'BidPriceAsPercentageOfOnDemandPrice': (basestring, False),
+        'BidPrice': (str, False),
+        'BidPriceAsPercentageOfOnDemandPrice': (str, False),
         'Configurations': ([Configuration], False),
         'EbsConfiguration': (EbsConfiguration, False),
-        'InstanceType': (basestring, True),
+        'InstanceType': (str, True),
         'WeightedCapacity': (positive_integer, False),
     }
 
@@ -290,7 +290,7 @@ class InstanceFleetConfigProperty(AWSProperty):
         'InstanceTypeConfigs': ([InstanceTypeConfig], False),
         'LaunchSpecifications':
             (InstanceFleetProvisioningSpecifications, False),
-        'Name': (basestring, False),
+        'Name': (str, False),
         'TargetOnDemandCapacity': (positive_integer, False),
         'TargetSpotCapacity': (positive_integer, False),
     }
@@ -298,46 +298,46 @@ class InstanceFleetConfigProperty(AWSProperty):
 
 class PlacementType(AWSProperty):
     props = {
-        'AvailabilityZone': (basestring, True)
+        'AvailabilityZone': (str, True)
     }
 
 
 class JobFlowInstancesConfig(AWSProperty):
     props = {
-        'AdditionalMasterSecurityGroups': ([basestring], False),
-        'AdditionalSlaveSecurityGroups': ([basestring], False),
+        'AdditionalMasterSecurityGroups': ([str], False),
+        'AdditionalSlaveSecurityGroups': ([str], False),
         'CoreInstanceFleet': (InstanceFleetConfigProperty, False),
         'CoreInstanceGroup': (InstanceGroupConfigProperty, False),
-        'Ec2KeyName': (basestring, False),
-        'Ec2SubnetId': (basestring, False),
-        'Ec2SubnetIds': ([basestring], False),
-        'EmrManagedMasterSecurityGroup': (basestring, False),
-        'EmrManagedSlaveSecurityGroup': (basestring, False),
-        'HadoopVersion': (basestring, False),
+        'Ec2KeyName': (str, False),
+        'Ec2SubnetId': (str, False),
+        'Ec2SubnetIds': ([str], False),
+        'EmrManagedMasterSecurityGroup': (str, False),
+        'EmrManagedSlaveSecurityGroup': (str, False),
+        'HadoopVersion': (str, False),
         'KeepJobFlowAliveWhenNoSteps': (boolean, False),
         'MasterInstanceFleet': (InstanceFleetConfigProperty, False),
         'MasterInstanceGroup': (InstanceGroupConfigProperty, False),
         'Placement': (PlacementType, False),
-        'ServiceAccessSecurityGroup': (basestring, False),
+        'ServiceAccessSecurityGroup': (str, False),
         'TerminationProtected': (boolean, False)
     }
 
 
 class KerberosAttributes(AWSProperty):
     props = {
-        'ADDomainJoinPassword': (basestring, False),
-        'ADDomainJoinUser': (basestring, False),
-        'CrossRealmTrustPrincipalPassword': (basestring, False),
-        'KdcAdminPassword': (basestring, True),
-        'Realm': (basestring, True),
+        'ADDomainJoinPassword': (str, False),
+        'ADDomainJoinUser': (str, False),
+        'CrossRealmTrustPrincipalPassword': (str, False),
+        'KdcAdminPassword': (str, True),
+        'Realm': (str, True),
     }
 
 
 class HadoopJarStepConfig(AWSProperty):
     props = {
-        'Args': ([basestring], False),
-        'Jar': (basestring, True),
-        'MainClass': (basestring, False),
+        'Args': ([str], False),
+        'Jar': (str, True),
+        'MainClass': (str, False),
         'StepProperties': ([KeyValue], False)
     }
 
@@ -346,7 +346,7 @@ class StepConfig(AWSProperty):
     props = {
         'ActionOnFailure': (validate_action_on_failure, False),
         'HadoopJarStep': (HadoopJarStepConfig, True),
-        'Name': (basestring, True),
+        'Name': (str, True),
     }
 
 
@@ -356,20 +356,20 @@ class Cluster(AWSObject):
     props = {
         'AdditionalInfo': (dict, False),
         'Applications': ([Application], False),
-        'AutoScalingRole': (basestring, False),
+        'AutoScalingRole': (str, False),
         'BootstrapActions': ([BootstrapActionConfig], False),
         'Configurations': ([Configuration], False),
-        'CustomAmiId': (basestring, False),
+        'CustomAmiId': (str, False),
         'EbsRootVolumeSize': (positive_integer, False),
         'Instances': (JobFlowInstancesConfig, True),
-        'JobFlowRole': (basestring, True),
+        'JobFlowRole': (str, True),
         'KerberosAttributes': (KerberosAttributes, False),
-        'LogUri': (basestring, False),
-        'Name': (basestring, True),
-        'ReleaseLabel': (basestring, False),
-        'ScaleDownBehavior': (basestring, False),
-        'SecurityConfiguration': (basestring, False),
-        'ServiceRole': (basestring, True),
+        'LogUri': (str, False),
+        'Name': (str, True),
+        'ReleaseLabel': (str, False),
+        'ScaleDownBehavior': (str, False),
+        'SecurityConfiguration': (str, False),
+        'ServiceRole': (str, True),
         'Steps': ([StepConfig], False),
         'Tags': ((Tags, list), False),
         'VisibleToAllUsers': (boolean, False)
@@ -380,12 +380,12 @@ class InstanceFleetConfig(AWSObject):
     resource_type = "AWS::EMR::InstanceFleetConfig"
 
     props = {
-        'ClusterId': (basestring, True),
-        'InstanceFleetType': (basestring, True),
+        'ClusterId': (str, True),
+        'InstanceFleetType': (str, True),
         'InstanceTypeConfigs': ([InstanceTypeConfig], False),
         'LaunchSpecifications':
             (InstanceFleetProvisioningSpecifications, False),
-        'Name': (basestring, False),
+        'Name': (str, False),
         'TargetOnDemandCapacity': (positive_integer, False),
         'TargetSpotCapacity': (positive_integer, False),
     }
@@ -396,15 +396,15 @@ class InstanceGroupConfig(AWSObject):
 
     props = {
         'AutoScalingPolicy': (AutoScalingPolicy, False),
-        'BidPrice': (basestring, False),
+        'BidPrice': (str, False),
         'Configurations': ([Configuration], False),
         'EbsConfiguration': (EbsConfiguration, False),
         'InstanceCount': (integer, True),
-        'InstanceRole': (basestring, True),
-        'InstanceType': (basestring, True),
-        'JobFlowId': (basestring, True),
+        'InstanceRole': (str, True),
+        'InstanceType': (str, True),
+        'JobFlowId': (str, True),
         'Market': (market_validator, False),
-        'Name': (basestring, False)
+        'Name': (str, False)
     }
 
 
@@ -422,6 +422,6 @@ class Step(AWSObject):
     props = {
         'ActionOnFailure': (action_on_failure_validator, True),
         'HadoopJarStep': (HadoopJarStepConfig, True),
-        'JobFlowId': (basestring, True),
-        'Name': (basestring, True)
+        'JobFlowId': (str, True),
+        'Name': (str, True)
     }

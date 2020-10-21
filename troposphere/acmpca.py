@@ -59,10 +59,10 @@ class Certificate(AWSObject):
     resource_type = "AWS::ACMPCA::Certificate"
 
     props = {
-        'CertificateAuthorityArn': (basestring, True),
-        'CertificateSigningRequest': (basestring, True),
+        'CertificateAuthorityArn': (str, True),
+        'CertificateSigningRequest': (str, True),
         'SigningAlgorithm': (validate_signing_algorithm, True),
-        'TemplateArn': (basestring, False),
+        'TemplateArn': (str, False),
         'Validity': (Validity, True),
     }
 
@@ -71,19 +71,19 @@ class CertificateAuthorityActivation(AWSObject):
     resource_type = "AWS::ACMPCA::CertificateAuthorityActivation"
 
     props = {
-        'Certificate': (basestring, True),
-        'CertificateAuthorityArn': (basestring, True),
-        'CertificateChain': (basestring, False),
-        'Status': (basestring, False),
+        'Certificate': (str, True),
+        'CertificateAuthorityArn': (str, True),
+        'CertificateChain': (str, False),
+        'Status': (str, False),
     }
 
 
 class CrlConfiguration(AWSProperty):
     props = {
-        'CustomCname': (basestring, False),
+        'CustomCname': (str, False),
         'Enabled': (boolean, False),
         'ExpirationInDays': (integer, False),
-        'S3BucketName': (basestring, False),
+        'S3BucketName': (str, False),
     }
 
 
@@ -95,20 +95,20 @@ class RevocationConfiguration(AWSProperty):
 
 class Subject(AWSProperty):
     props = {
-        'CommonName': (basestring, False),
-        'Country': (basestring, False),
-        'DistinguishedNameQualifier': (basestring, False),
-        'GenerationQualifier': (basestring, False),
-        'GivenName': (basestring, False),
-        'Initials': (basestring, False),
-        'Locality': (basestring, False),
-        'Organization': (basestring, False),
-        'OrganizationalUnit': (basestring, False),
-        'Pseudonym': (basestring, False),
-        'SerialNumber': (basestring, False),
-        'State': (basestring, False),
-        'Surname': (basestring, False),
-        'Title': (basestring, False),
+        'CommonName': (str, False),
+        'Country': (str, False),
+        'DistinguishedNameQualifier': (str, False),
+        'GenerationQualifier': (str, False),
+        'GivenName': (str, False),
+        'Initials': (str, False),
+        'Locality': (str, False),
+        'Organization': (str, False),
+        'OrganizationalUnit': (str, False),
+        'Pseudonym': (str, False),
+        'SerialNumber': (str, False),
+        'State': (str, False),
+        'Surname': (str, False),
+        'Title': (str, False),
     }
 
 

@@ -20,26 +20,26 @@ class CacheCluster(AWSObject):
 
     props = {
         'AutoMinorVersionUpgrade': (boolean, False),
-        'AZMode': (basestring, False),
-        'CacheNodeType': (basestring, True),
-        'CacheParameterGroupName': (basestring, False),
-        'CacheSecurityGroupNames': ([basestring], False),
-        'CacheSubnetGroupName': (basestring, False),
-        'ClusterName': (basestring, False),
-        'Engine': (basestring, True),
-        'EngineVersion': (basestring, False),
-        'NotificationTopicArn': (basestring, False),
+        'AZMode': (str, False),
+        'CacheNodeType': (str, True),
+        'CacheParameterGroupName': (str, False),
+        'CacheSecurityGroupNames': ([str], False),
+        'CacheSubnetGroupName': (str, False),
+        'ClusterName': (str, False),
+        'Engine': (str, True),
+        'EngineVersion': (str, False),
+        'NotificationTopicArn': (str, False),
         'NumCacheNodes': (integer, True),
         'Port': (integer, False),
-        'PreferredAvailabilityZone': (basestring, False),
-        'PreferredAvailabilityZones': ([basestring], False),
-        'PreferredMaintenanceWindow': (basestring, False),
-        'SnapshotArns': ([basestring], False),
-        'SnapshotName': (basestring, False),
+        'PreferredAvailabilityZone': (str, False),
+        'PreferredAvailabilityZones': ([str], False),
+        'PreferredMaintenanceWindow': (str, False),
+        'SnapshotArns': ([str], False),
+        'SnapshotName': (str, False),
         'SnapshotRetentionLimit': (integer, False),
-        'SnapshotWindow': (basestring, False),
+        'SnapshotWindow': (str, False),
         'Tags': (Tags, False),
-        'VpcSecurityGroupIds': ([basestring], False),
+        'VpcSecurityGroupIds': ([str], False),
     }
 
     def validate(self):
@@ -64,8 +64,8 @@ class ParameterGroup(AWSObject):
     resource_type = "AWS::ElastiCache::ParameterGroup"
 
     props = {
-        'CacheParameterGroupFamily': (basestring, True),
-        'Description': (basestring, True),
+        'CacheParameterGroupFamily': (str, True),
+        'Description': (str, True),
         'Properties': (dict, True),
     }
 
@@ -74,7 +74,7 @@ class SecurityGroup(AWSObject):
     resource_type = "AWS::ElastiCache::SecurityGroup"
 
     props = {
-        'Description': (basestring, False),
+        'Description': (str, False),
     }
 
 
@@ -82,9 +82,9 @@ class SecurityGroupIngress(AWSObject):
     resource_type = "AWS::ElastiCache::SecurityGroupIngress"
 
     props = {
-        'CacheSecurityGroupName': (basestring, True),
-        'EC2SecurityGroupName': (basestring, True),
-        'EC2SecurityGroupOwnerId': (basestring, False),
+        'CacheSecurityGroupName': (str, True),
+        'EC2SecurityGroupName': (str, True),
+        'EC2SecurityGroupOwnerId': (str, False),
     }
 
 
@@ -92,8 +92,8 @@ class SubnetGroup(AWSObject):
     resource_type = "AWS::ElastiCache::SubnetGroup"
 
     props = {
-        'CacheSubnetGroupName': (basestring, False),
-        'Description': (basestring, True),
+        'CacheSubnetGroupName': (str, False),
+        'Description': (str, True),
         'SubnetIds': (list, True),
     }
 
@@ -101,10 +101,10 @@ class SubnetGroup(AWSObject):
 class NodeGroupConfiguration(AWSProperty):
     props = {
         'NodeGroupId': (validate_node_group_id, False),
-        'PrimaryAvailabilityZone': (basestring, False),
-        'ReplicaAvailabilityZones': ([basestring], False),
+        'PrimaryAvailabilityZone': (str, False),
+        'ReplicaAvailabilityZones': ([str], False),
         'ReplicaCount': (integer, False),
-        'Slots': (basestring, False),
+        'Slots': (str, False),
     }
 
 
@@ -113,34 +113,34 @@ class ReplicationGroup(AWSObject):
 
     props = {
         'AtRestEncryptionEnabled': (boolean, False),
-        'AuthToken': (basestring, False),
+        'AuthToken': (str, False),
         'AutoMinorVersionUpgrade': (boolean, False),
         'AutomaticFailoverEnabled': (boolean, False),
-        'CacheNodeType': (basestring, False),
-        'CacheParameterGroupName': (basestring, False),
-        'CacheSecurityGroupNames': ([basestring], False),
-        'CacheSubnetGroupName': (basestring, False),
-        'Engine': (basestring, False),
-        'EngineVersion': (basestring, False),
-        'KmsKeyId': (basestring, False),
+        'CacheNodeType': (str, False),
+        'CacheParameterGroupName': (str, False),
+        'CacheSecurityGroupNames': ([str], False),
+        'CacheSubnetGroupName': (str, False),
+        'Engine': (str, False),
+        'EngineVersion': (str, False),
+        'KmsKeyId': (str, False),
         'MultiAZEnabled': (boolean, False),
         'NodeGroupConfiguration': ([NodeGroupConfiguration], False),
-        'NotificationTopicArn': (basestring, False),
+        'NotificationTopicArn': (str, False),
         'NumCacheClusters': (integer, False),
         'NumNodeGroups': (integer, False),
         'Port': (network_port, False),
-        'PreferredCacheClusterAZs': ([basestring], False),
-        'PreferredMaintenanceWindow': (basestring, False),
-        'PrimaryClusterId': (basestring, False),
+        'PreferredCacheClusterAZs': ([str], False),
+        'PreferredMaintenanceWindow': (str, False),
+        'PrimaryClusterId': (str, False),
         'ReplicasPerNodeGroup': (integer, False),
-        'ReplicationGroupDescription': (basestring, True),
-        'ReplicationGroupId': (basestring, False),
-        'SecurityGroupIds': ([basestring], False),
-        'SnapshotArns': ([basestring], False),
-        'SnapshotName': (basestring, False),
+        'ReplicationGroupDescription': (str, True),
+        'ReplicationGroupId': (str, False),
+        'SecurityGroupIds': ([str], False),
+        'SnapshotArns': ([str], False),
+        'SnapshotName': (str, False),
         'SnapshotRetentionLimit': (integer, False),
-        'SnapshotWindow': (basestring, False),
-        'SnapshottingClusterId': (basestring, False),
+        'SnapshotWindow': (str, False),
+        'SnapshottingClusterId': (str, False),
         'Tags': (Tags, False),
         'TransitEncryptionEnabled': (boolean, False),
     }

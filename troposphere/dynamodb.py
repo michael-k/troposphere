@@ -40,14 +40,14 @@ def billing_mode_validator(x):
 
 class AttributeDefinition(AWSProperty):
     props = {
-        "AttributeName": (basestring, True),
+        "AttributeName": (str, True),
         "AttributeType": (attribute_type_validator, True),
     }
 
 
 class KeySchema(AWSProperty):
     props = {
-        "AttributeName": (basestring, True),
+        "AttributeName": (str, True),
         "KeyType": (key_type_validator, True)
     }
 
@@ -66,22 +66,22 @@ class ProvisionedThroughput(AWSProperty):
 
 class Projection(AWSProperty):
     props = {
-        "NonKeyAttributes": ([basestring], False),
+        "NonKeyAttributes": ([str], False),
         "ProjectionType": (projection_type_validator, False)
     }
 
 
 class SSESpecification(AWSProperty):
     props = {
-        'KMSMasterKeyId': (basestring, False),
+        'KMSMasterKeyId': (str, False),
         'SSEEnabled': (boolean, True),
-        'SSEType': (basestring, False),
+        'SSEType': (str, False),
     }
 
 
 class GlobalSecondaryIndex(AWSProperty):
     props = {
-        "IndexName": (basestring, True),
+        "IndexName": (str, True),
         "KeySchema": ([KeySchema], True),
         "Projection": (Projection, True),
         "ProvisionedThroughput": (ProvisionedThroughput, False)
@@ -90,7 +90,7 @@ class GlobalSecondaryIndex(AWSProperty):
 
 class LocalSecondaryIndex(AWSProperty):
     props = {
-        "IndexName": (basestring, True),
+        "IndexName": (str, True),
         "KeySchema": ([KeySchema], True),
         "Projection": (Projection, True),
     }
@@ -104,13 +104,13 @@ class PointInTimeRecoverySpecification(AWSProperty):
 
 class StreamSpecification(AWSProperty):
     props = {
-        'StreamViewType': (basestring, True),
+        'StreamViewType': (str, True),
     }
 
 
 class TimeToLiveSpecification(AWSProperty):
     props = {
-        'AttributeName': (basestring, True),
+        'AttributeName': (str, True),
         'Enabled': (boolean, True),
     }
 
@@ -129,7 +129,7 @@ class Table(AWSObject):
         'ProvisionedThroughput': (ProvisionedThroughput, False),
         'SSESpecification': (SSESpecification, False),
         'StreamSpecification': (StreamSpecification, False),
-        'TableName': (basestring, False),
+        'TableName': (str, False),
         'Tags': (Tags, False),
         'TimeToLiveSpecification': (TimeToLiveSpecification, False),
     }

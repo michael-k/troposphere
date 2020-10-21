@@ -27,7 +27,7 @@ def validate_listenertls_mode(listenertls_mode):
 
 class EgressFilter(AWSProperty):
     props = {
-        'Type': (basestring, True),
+        'Type': (str, True),
     }
 
 
@@ -41,7 +41,7 @@ class Mesh(AWSObject):
     resource_type = "AWS::AppMesh::Mesh"
 
     props = {
-        'MeshName': (basestring, True),
+        'MeshName': (str, True),
         'Spec': (MeshSpec, False),
         'Tags': (Tags, False),
     }
@@ -49,24 +49,24 @@ class Mesh(AWSObject):
 
 class Duration(AWSProperty):
     props = {
-        'Unit': (basestring, True),
+        'Unit': (str, True),
         'Value': (integer, True),
     }
 
 
 class GrpcRetryPolicy(AWSProperty):
     props = {
-        'GrpcRetryEvents': ([basestring], False),
-        'HttpRetryEvents': ([basestring], False),
+        'GrpcRetryEvents': ([str], False),
+        'HttpRetryEvents': ([str], False),
         'MaxRetries': (integer, True),
         'PerRetryTimeout': (Duration, True),
-        'TcpRetryEvents': ([basestring], False),
+        'TcpRetryEvents': ([str], False),
     }
 
 
 class WeightedTarget(AWSProperty):
     props = {
-        'VirtualNode': (basestring, True),
+        'VirtualNode': (str, True),
         'Weight': (integer, True),
     }
 
@@ -86,11 +86,11 @@ class MatchRange(AWSProperty):
 
 class GrpcRouteMetadataMatchMethod(AWSProperty):
     props = {
-        'Exact': (basestring, False),
-        'Prefix': (basestring, False),
+        'Exact': (str, False),
+        'Prefix': (str, False),
         'Range': (MatchRange, False),
-        'Regex': (basestring, False),
-        'Suffix': (basestring, False),
+        'Regex': (str, False),
+        'Suffix': (str, False),
     }
 
 
@@ -98,15 +98,15 @@ class GrpcRouteMetadata(AWSProperty):
     props = {
         'Invert': (boolean, False),
         'Match': (GrpcRouteMetadataMatchMethod, False),
-        'Name': (basestring, True),
+        'Name': (str, True),
     }
 
 
 class GrpcRouteMatch(AWSProperty):
     props = {
         'Metadata': ([GrpcRouteMetadata], False),
-        'MethodName': (basestring, False),
-        'ServiceName': (basestring, False),
+        'MethodName': (str, False),
+        'ServiceName': (str, False),
     }
 
 
@@ -128,10 +128,10 @@ class GrpcRoute(AWSProperty):
 
 class HttpRetryPolicy(AWSProperty):
     props = {
-        'HttpRetryEvents': ([basestring], False),
+        'HttpRetryEvents': ([str], False),
         'MaxRetries': (integer, True),
         'PerRetryTimeout': (Duration, True),
-        'TcpRetryEvents': ([basestring], False),
+        'TcpRetryEvents': ([str], False),
     }
 
 
@@ -143,11 +143,11 @@ class HttpRouteAction(AWSProperty):
 
 class HeaderMatchMethod(AWSProperty):
     props = {
-        'Exact': (basestring, False),
-        'Prefix': (basestring, False),
+        'Exact': (str, False),
+        'Prefix': (str, False),
         'Range': (MatchRange, False),
-        'Regex': (basestring, False),
-        'Suffix': (basestring, False),
+        'Regex': (str, False),
+        'Suffix': (str, False),
     }
 
 
@@ -155,16 +155,16 @@ class HttpRouteHeader(AWSProperty):
     props = {
         'Invert': (boolean, False),
         'Match': (HeaderMatchMethod, False),
-        'Name': (basestring, True),
+        'Name': (str, True),
     }
 
 
 class HttpRouteMatch(AWSProperty):
     props = {
         'Headers': ([HttpRouteHeader], False),
-        'Method': (basestring, False),
-        'Prefix': (basestring, True),
-        'Scheme': (basestring, False),
+        'Method': (str, False),
+        'Prefix': (str, True),
+        'Scheme': (str, False),
     }
 
 
@@ -217,24 +217,24 @@ class Route(AWSObject):
     resource_type = "AWS::AppMesh::Route"
 
     props = {
-        'MeshName': (basestring, True),
-        'MeshOwner': (basestring, False),
-        'RouteName': (basestring, True),
+        'MeshName': (str, True),
+        'MeshOwner': (str, False),
+        'RouteName': (str, True),
         'Spec': (RouteSpec, True),
         'Tags': (Tags, False),
-        'VirtualRouterName': (basestring, True),
+        'VirtualRouterName': (str, True),
     }
 
 
 class TlsValidationContextAcmTrust(AWSProperty):
     props = {
-        'CertificateAuthorityArns': ([basestring], True),
+        'CertificateAuthorityArns': ([str], True),
     }
 
 
 class TlsValidationContextFileTrust(AWSProperty):
     props = {
-        'CertificateChain': (basestring, True),
+        'CertificateChain': (str, True),
     }
 
 
@@ -268,7 +268,7 @@ class ClientPolicy(AWSProperty):
 class VirtualServiceBackend(AWSProperty):
     props = {
         'ClientPolicy': (ClientPolicy, False),
-        'VirtualServiceName': (basestring, True),
+        'VirtualServiceName': (str, True),
     }
 
 
@@ -288,9 +288,9 @@ class HealthCheck(AWSProperty):
     props = {
         'HealthyThreshold': (integer, True),
         'IntervalMillis': (integer, True),
-        'Path': (basestring, False),
+        'Path': (str, False),
         'Port': (integer, False),
-        'Protocol': (basestring, True),
+        'Protocol': (str, True),
         'TimeoutMillis': (integer, True),
         'UnhealthyThreshold': (integer, True),
     }
@@ -307,14 +307,14 @@ class ListenerTimeout(AWSProperty):
 
 class ListenerTlsAcmCertificate(AWSProperty):
     props = {
-        'CertificateArn': (basestring, True),
+        'CertificateArn': (str, True),
     }
 
 
 class ListenerTlsFileCertificate(AWSProperty):
     props = {
-        'CertificateChain': (basestring, True),
-        'PrivateKey': (basestring, True),
+        'CertificateChain': (str, True),
+        'PrivateKey': (str, True),
     }
 
 
@@ -335,7 +335,7 @@ class ListenerTls(AWSProperty):
 class PortMapping(AWSProperty):
     props = {
         'Port': (integer, True),
-        'Protocol': (basestring, True),
+        'Protocol': (str, True),
     }
 
 
@@ -350,7 +350,7 @@ class Listener(AWSProperty):
 
 class FileAccessLog(AWSProperty):
     props = {
-        'Path': (basestring, True),
+        'Path': (str, True),
     }
 
 
@@ -368,22 +368,22 @@ class Logging(AWSProperty):
 
 class AwsCloudMapInstanceAttribute(AWSProperty):
     props = {
-        'Key': (basestring, True),
-        'Value': (basestring, True),
+        'Key': (str, True),
+        'Value': (str, True),
     }
 
 
 class AwsCloudMapServiceDiscovery(AWSProperty):
     props = {
         'Attributes': ([AwsCloudMapInstanceAttribute], False),
-        'NamespaceName': (basestring, True),
-        'ServiceName': (basestring, True),
+        'NamespaceName': (str, True),
+        'ServiceName': (str, True),
     }
 
 
 class DnsServiceDiscovery(AWSProperty):
     props = {
-        'Hostname': (basestring, True),
+        'Hostname': (str, True),
     }
 
 
@@ -408,11 +408,11 @@ class VirtualNode(AWSObject):
     resource_type = "AWS::AppMesh::VirtualNode"
 
     props = {
-        'MeshName': (basestring, True),
-        'MeshOwner': (basestring, False),
+        'MeshName': (str, True),
+        'MeshOwner': (str, False),
         'Spec': (VirtualNodeSpec, True),
         'Tags': (Tags, False),
-        'VirtualNodeName': (basestring, True),
+        'VirtualNodeName': (str, True),
     }
 
 
@@ -432,23 +432,23 @@ class VirtualRouter(AWSObject):
     resource_type = "AWS::AppMesh::VirtualRouter"
 
     props = {
-        'MeshName': (basestring, True),
-        'MeshOwner': (basestring, False),
+        'MeshName': (str, True),
+        'MeshOwner': (str, False),
         'Spec': (VirtualRouterSpec, True),
         'Tags': (Tags, False),
-        'VirtualRouterName': (basestring, True),
+        'VirtualRouterName': (str, True),
     }
 
 
 class VirtualNodeServiceProvider(AWSProperty):
     props = {
-        'VirtualNodeName': (basestring, True),
+        'VirtualNodeName': (str, True),
     }
 
 
 class VirtualRouterServiceProvider(AWSProperty):
     props = {
-        'VirtualRouterName': (basestring, True),
+        'VirtualRouterName': (str, True),
     }
 
 
@@ -469,11 +469,11 @@ class VirtualService(AWSObject):
     resource_type = "AWS::AppMesh::VirtualService"
 
     props = {
-        'MeshName': (basestring, True),
-        'MeshOwner': (basestring, False),
+        'MeshName': (str, True),
+        'MeshOwner': (str, False),
         'Spec': (VirtualServiceSpec, True),
         'Tags': (Tags, False),
-        'VirtualServiceName': (basestring, True),
+        'VirtualServiceName': (str, True),
     }
 
 
@@ -506,11 +506,11 @@ class VirtualGateway(AWSObject):
     """
     resource_type = "AWS::AppMesh::VirtualGateway"
     props = {
-        "MeshName": (basestring, True),
-        "MeshOwner": (basestring, False),
+        "MeshName": (str, True),
+        "MeshOwner": (str, False),
         "Spec": (VirtualGatewaySpec, True),
         "Tags": ([Tags], False),
-        "VirtualGatewayName": (basestring, True)
+        "VirtualGatewayName": (str, True)
     }
 
 
@@ -519,7 +519,7 @@ class GatewayHttpRouteMatch(AWSProperty):
     GatewayHttpRouteMatch for GatewayHttpRoute
     """
     props = {
-        'Prefix': (basestring, True),
+        'Prefix': (str, True),
     }
 
 
@@ -528,7 +528,7 @@ class GatewayRouteVirtualService(AWSProperty):
     GatewayRouteVirtualService for GatewayRouteTarget
     """
     props = {
-        "VirtualServiceName": (basestring, True)
+        "VirtualServiceName": (str, True)
     }
 
 
@@ -566,7 +566,7 @@ class GatewayGrpcRouteMatch(AWSProperty):
     GatewayGrpcRouteMatch for GatewayGrpcRoute
     """
     props = {
-        'ServiceName': (basestring, False),
+        'ServiceName': (str, False),
     }
 
 
@@ -606,10 +606,10 @@ class GatewayRoute(AWSObject):
     """
     resource_type = "AWS::AppMesh::GatewayRoute"
     props = {
-      "GatewayRouteName": (basestring, True),
-      "MeshName": (basestring, True),
-      "MeshOwner": (basestring, False),
+      "GatewayRouteName": (str, True),
+      "MeshName": (str, True),
+      "MeshOwner": (str, False),
       "Spec": (GatewayRouteSpec, True),
       "Tags": ([Tags], False),
-      "VirtualGatewayName": (basestring, True)
+      "VirtualGatewayName": (str, True)
     }

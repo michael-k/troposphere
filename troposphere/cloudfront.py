@@ -20,64 +20,64 @@ from .validators import (boolean, cloudfront_restriction_type,
 class Cookies(AWSProperty):
     props = {
         'Forward': (cloudfront_forward_type, True),
-        'WhitelistedNames': ([basestring], False),
+        'WhitelistedNames': ([str], False),
     }
 
 
 class ForwardedValues(AWSProperty):
     props = {
         'Cookies': (Cookies, False),
-        'Headers': ([basestring], False),
+        'Headers': ([str], False),
         'QueryString': (boolean, True),
-        'QueryStringCacheKeys': ([basestring], False),
+        'QueryStringCacheKeys': ([str], False),
     }
 
 
 class LambdaFunctionAssociation(AWSProperty):
     props = {
         'EventType': (cloudfront_event_type, False),
-        'LambdaFunctionARN': (basestring, False),
+        'LambdaFunctionARN': (str, False),
     }
 
 
 class CacheBehavior(AWSProperty):
     props = {
-        'AllowedMethods': ([basestring], False),
-        'CachePolicyId': (basestring, False),
-        'CachedMethods': ([basestring], False),
+        'AllowedMethods': ([str], False),
+        'CachePolicyId': (str, False),
+        'CachedMethods': ([str], False),
         'Compress': (boolean, False),
         'DefaultTTL': (integer, False),
-        'FieldLevelEncryptionId': (basestring, False),
+        'FieldLevelEncryptionId': (str, False),
         'ForwardedValues': (ForwardedValues, False),
         'LambdaFunctionAssociations': ([LambdaFunctionAssociation], False),
         'MaxTTL': (integer, False),
         'MinTTL': (integer, False),
-        'OriginRequestPolicyId': (basestring, False),
-        'PathPattern': (basestring, True),
-        'RealtimeLogConfigArn': (basestring, False),
+        'OriginRequestPolicyId': (str, False),
+        'PathPattern': (str, True),
+        'RealtimeLogConfigArn': (str, False),
         'SmoothStreaming': (boolean, False),
-        'TargetOriginId': (basestring, True),
-        'TrustedSigners': ([basestring], False),
+        'TargetOriginId': (str, True),
+        'TrustedSigners': ([str], False),
         'ViewerProtocolPolicy': (cloudfront_viewer_protocol_policy, True),
     }
 
 
 class DefaultCacheBehavior(AWSProperty):
     props = {
-        'AllowedMethods': ([basestring], False),
-        'CachePolicyId': (basestring, False),
-        'CachedMethods': ([basestring], False),
+        'AllowedMethods': ([str], False),
+        'CachePolicyId': (str, False),
+        'CachedMethods': ([str], False),
         'Compress': (boolean, False),
         'DefaultTTL': (integer, False),
-        'FieldLevelEncryptionId': (basestring, False),
+        'FieldLevelEncryptionId': (str, False),
         'ForwardedValues': (ForwardedValues, False),
         'LambdaFunctionAssociations': ([LambdaFunctionAssociation], False),
         'MaxTTL': (integer, False),
         'MinTTL': (integer, False),
-        'OriginRequestPolicyId': (basestring, False),
-        'RealtimeLogConfigArn': (basestring, False),
+        'OriginRequestPolicyId': (str, False),
+        'RealtimeLogConfigArn': (str, False),
         'SmoothStreaming': (boolean, False),
-        'TargetOriginId': (basestring, True),
+        'TargetOriginId': (str, True),
         'TrustedSigners': (list, False),
         'ViewerProtocolPolicy': (cloudfront_viewer_protocol_policy, True),
     }
@@ -85,8 +85,8 @@ class DefaultCacheBehavior(AWSProperty):
 
 class S3Origin(AWSProperty):
     props = {
-        'DomainName': (basestring, True),
-        'OriginAccessIdentity': (basestring, False),
+        'DomainName': (str, True),
+        'OriginAccessIdentity': (str, False),
     }
 
 
@@ -95,22 +95,22 @@ class CustomOriginConfig(AWSProperty):
         'HTTPPort': (network_port, False),
         'HTTPSPort': (network_port, False),
         'OriginKeepaliveTimeout': (integer, False),
-        'OriginProtocolPolicy': (basestring, True),
+        'OriginProtocolPolicy': (str, True),
         'OriginReadTimeout': (integer, False),
-        'OriginSSLProtocols': ([basestring], False),
+        'OriginSSLProtocols': ([str], False),
     }
 
 
 class OriginCustomHeader(AWSProperty):
     props = {
-        'HeaderName': (basestring, True),
-        'HeaderValue': (basestring, True),
+        'HeaderName': (str, True),
+        'HeaderValue': (str, True),
     }
 
 
 class S3OriginConfig(AWSProperty):
     props = {
-        'OriginAccessIdentity': (basestring, False),
+        'OriginAccessIdentity': (str, False),
     }
 
 
@@ -119,19 +119,19 @@ class Origin(AWSProperty):
         'ConnectionAttempts': (integer, False),
         'ConnectionTimeout': (integer, False),
         'CustomOriginConfig': (CustomOriginConfig, False),
-        'DomainName': (basestring, True),
-        'Id': (basestring, True),
+        'DomainName': (str, True),
+        'Id': (str, True),
         'OriginCustomHeaders': ([OriginCustomHeader], False),
-        'OriginPath': (basestring, False),
+        'OriginPath': (str, False),
         'S3OriginConfig': (S3OriginConfig, False),
     }
 
 
 class Logging(AWSProperty):
     props = {
-        'Bucket': (basestring, True),
+        'Bucket': (str, True),
         'IncludeCookies': (boolean, False),
-        'Prefix': (basestring, False),
+        'Prefix': (str, False),
     }
 
 
@@ -140,13 +140,13 @@ class CustomErrorResponse(AWSProperty):
         'ErrorCachingMinTTL': (positive_integer, False),
         'ErrorCode': (positive_integer, True),
         'ResponseCode': (positive_integer, False),
-        'ResponsePagePath': (basestring, False),
+        'ResponsePagePath': (str, False),
     }
 
 
 class GeoRestriction(AWSProperty):
     props = {
-        'Locations': ([basestring], False),
+        'Locations': ([str], False),
         'RestrictionType': (cloudfront_restriction_type, True),
     }
 
@@ -159,11 +159,11 @@ class Restrictions(AWSProperty):
 
 class ViewerCertificate(AWSProperty):
     props = {
-        'AcmCertificateArn': (basestring, False),
+        'AcmCertificateArn': (str, False),
         'CloudFrontDefaultCertificate': (boolean, False),
-        'IamCertificateId': (basestring, False),
-        'MinimumProtocolVersion': (basestring, False),
-        'SslSupportMethod': (basestring, False),
+        'IamCertificateId': (str, False),
+        'MinimumProtocolVersion': (str, False),
+        'SslSupportMethod': (str, False),
     }
 
 
@@ -182,7 +182,7 @@ class OriginGroupFailoverCriteria(AWSProperty):
 
 class OriginGroupMember(AWSProperty):
     props = {
-        'OriginId': (basestring, True),
+        'OriginId': (str, True),
     }
 
 
@@ -196,7 +196,7 @@ class OriginGroupMembers(AWSProperty):
 class OriginGroup(AWSProperty):
     props = {
         'FailoverCriteria': (OriginGroupFailoverCriteria, True),
-        'Id': (basestring, True),
+        'Id': (str, True),
         'Members': (OriginGroupMembers, True),
     }
 
@@ -212,12 +212,12 @@ class DistributionConfig(AWSProperty):
     props = {
         'Aliases': (list, False),
         'CacheBehaviors': ([CacheBehavior], False),
-        'Comment': (basestring, False),
+        'Comment': (str, False),
         'CustomErrorResponses': ([CustomErrorResponse], False),
         'DefaultCacheBehavior': (DefaultCacheBehavior, True),
-        'DefaultRootObject': (basestring, False),
+        'DefaultRootObject': (str, False),
         'Enabled': (boolean, True),
-        'HttpVersion': (basestring, False),
+        'HttpVersion': (str, False),
         'IPV6Enabled': (boolean, False),
         'Logging': (Logging, False),
         'Origins': ([Origin], True),
@@ -225,7 +225,7 @@ class DistributionConfig(AWSProperty):
         'PriceClass': (priceclass_type, False),
         'Restrictions': (Restrictions, False),
         'ViewerCertificate': (ViewerCertificate, False),
-        'WebACLId': (basestring, False),
+        'WebACLId': (str, False),
     }
 
 
@@ -240,7 +240,7 @@ class Distribution(AWSObject):
 
 class CloudFrontOriginAccessIdentityConfig(AWSProperty):
     props = {
-        'Comment': (basestring, True),
+        'Comment': (str, True),
     }
 
 
@@ -257,15 +257,15 @@ class CloudFrontOriginAccessIdentity(AWSObject):
 
 class TrustedSigners(AWSProperty):
     props = {
-        'AwsAccountNumbers': ([basestring], False),
+        'AwsAccountNumbers': ([str], False),
         'Enabled': (boolean, True),
     }
 
 
 class StreamingDistributionConfig(AWSProperty):
     props = {
-        'Aliases': ([basestring], False),
-        'Comment': (basestring, True),
+        'Aliases': ([str], False),
+        'Comment': (str, True),
         'Enabled': (boolean, True),
         'Logging': (Logging, False),
         'PriceClass': (priceclass_type, False),
@@ -286,14 +286,14 @@ class StreamingDistribution(AWSObject):
 class CacheCookiesConfig(AWSProperty):
     props = {
         'CookieBehavior': (cloudfront_cache_cookie_behavior, True),
-        'Cookies': ([basestring], False),
+        'Cookies': ([str], False),
     }
 
 
 class CacheHeadersConfig(AWSProperty):
     props = {
         'HeaderBehavior': (cloudfront_cache_header_behavior, True),
-        'Headers': ([basestring], False),
+        'Headers': ([str], False),
     }
 
 
@@ -301,7 +301,7 @@ class CacheQueryStringsConfig(AWSProperty):
     props = {
         'QueryStringBehavior': (
             cloudfront_cache_query_string_behavior, True),
-        'QueryStrings': ([basestring], False),
+        'QueryStrings': ([str], False),
     }
 
 
@@ -317,11 +317,11 @@ class ParametersInCacheKeyAndForwardedToOrigin(AWSProperty):
 
 class CachePolicyConfig(AWSProperty):
     props = {
-        'Comment': (basestring, False),
+        'Comment': (str, False),
         'DefaultTTL': (integer, True),
         'MaxTTL': (integer, True),
         'MinTTL': (integer, True),
-        'Name': (basestring, True),
+        'Name': (str, True),
         'ParametersInCacheKeyAndForwardedToOrigin': (
             ParametersInCacheKeyAndForwardedToOrigin, True),
     }
@@ -338,14 +338,14 @@ class CachePolicy(AWSObject):
 class OriginRequestCookiesConfig(AWSProperty):
     props = {
         'CookieBehavior': (cloudfront_origin_request_cookie_behavior, True),
-        'Cookies': ([basestring], False),
+        'Cookies': ([str], False),
     }
 
 
 class OriginRequestHeadersConfig(AWSProperty):
     props = {
         'HeaderBehavior': (cloudfront_origin_request_header_behavior, True),
-        'Headers': ([basestring], False),
+        'Headers': ([str], False),
     }
 
 
@@ -353,16 +353,16 @@ class OriginRequestQueryStringsConfig(AWSProperty):
     props = {
         'QueryStringBehavior': (
             cloudfront_origin_request_query_string_behavior, True),
-        'QueryStrings': ([basestring], False),
+        'QueryStrings': ([str], False),
     }
 
 
 class OriginRequestPolicyConfig(AWSProperty):
     props = {
-        'Comment': (basestring, False),
+        'Comment': (str, False),
         'CookiesConfig': (OriginRequestCookiesConfig, True),
         'HeadersConfig': (OriginRequestHeadersConfig, True),
-        'Name': (basestring, True),
+        'Name': (str, True),
         'QueryStringsConfig': (OriginRequestQueryStringsConfig, True),
     }
 
@@ -377,15 +377,15 @@ class OriginRequestPolicy(AWSObject):
 
 class KinesisStreamConfig(AWSProperty):
     props = {
-        'RoleArn': (basestring, True),
-        'StreamArn': (basestring, True),
+        'RoleArn': (str, True),
+        'StreamArn': (str, True),
     }
 
 
 class EndPoint(AWSProperty):
     props = {
         'KinesisStreamConfig': (KinesisStreamConfig, True),
-        'StreamType': (basestring, True),
+        'StreamType': (str, True),
     }
 
 
@@ -394,7 +394,7 @@ class RealtimeLogConfig(AWSObject):
 
     props = {
         'EndPoints': ([EndPoint], True),
-        'Fields': ([basestring], True),
-        'Name': (basestring, True),
+        'Fields': ([str], True),
+        'Name': (str, True),
         'SamplingRate': (float, True),
     }

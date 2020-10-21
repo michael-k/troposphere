@@ -26,17 +26,17 @@ def validate_homedirectory_type(homedirectory_type):
 
 class EndpointDetails(AWSProperty):
     props = {
-        'AddressAllocationIds': ([basestring], False),
-        'SubnetIds': ([basestring], False),
-        'VpcEndpointId': (basestring, False),
-        'VpcId': (basestring, False),
+        'AddressAllocationIds': ([str], False),
+        'SubnetIds': ([str], False),
+        'VpcEndpointId': (str, False),
+        'VpcId': (str, False),
     }
 
 
 class IdentityProviderDetails(AWSProperty):
     props = {
-        'InvocationRole': (basestring, True),
-        'Url': (basestring, True),
+        'InvocationRole': (str, True),
+        'Url': (str, True),
     }
 
 
@@ -44,22 +44,22 @@ class Server(AWSObject):
     resource_type = "AWS::Transfer::Server"
 
     props = {
-        'Certificate': (basestring, False),
+        'Certificate': (str, False),
         'EndpointDetails': (EndpointDetails, False),
-        'EndpointType': (basestring, False),
+        'EndpointType': (str, False),
         'IdentityProviderDetails': (IdentityProviderDetails, False),
-        'IdentityProviderType': (basestring, False),
-        'LoggingRole': (basestring, False),
-        'Protocols': ([basestring], False),
-        'SecurityPolicyName': (basestring, False),
+        'IdentityProviderType': (str, False),
+        'LoggingRole': (str, False),
+        'Protocols': ([str], False),
+        'SecurityPolicyName': (str, False),
         'Tags': (Tags, False),
     }
 
 
 class HomeDirectoryMapEntry(AWSProperty):
     props = {
-        'Entry': (basestring, True),
-        'Target': (basestring, True),
+        'Entry': (str, True),
+        'Target': (str, True),
     }
 
 
@@ -67,13 +67,13 @@ class User(AWSObject):
     resource_type = "AWS::Transfer::User"
 
     props = {
-        'HomeDirectory': (basestring, False),
+        'HomeDirectory': (str, False),
         'HomeDirectoryMappings': ([HomeDirectoryMapEntry], False),
         'HomeDirectoryType': (validate_homedirectory_type, False),
-        'Policy': (basestring, False),
-        'Role': (basestring, True),
-        'ServerId': (basestring, True),
-        'SshPublicKeys': ([basestring], False),
+        'Policy': (str, False),
+        'Role': (str, True),
+        'ServerId': (str, True),
+        'SshPublicKeys': ([str], False),
         'Tags': (Tags, False),
-        'UserName': (basestring, True),
+        'UserName': (str, True),
     }

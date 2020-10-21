@@ -51,10 +51,10 @@ def validate_variables_name(variables):
 
 class Code(AWSProperty):
     props = {
-        'S3Bucket': (basestring, False),
-        'S3Key': (basestring, False),
-        'S3ObjectVersion': (basestring, False),
-        'ZipFile': (basestring, False)
+        'S3Bucket': (str, False),
+        'S3Key': (str, False),
+        'S3ObjectVersion': (str, False),
+        'ZipFile': (str, False)
     }
 
     @staticmethod
@@ -69,7 +69,7 @@ class Code(AWSProperty):
         if zip_file is None:
             return
 
-        if isinstance(zip_file, basestring):
+        if isinstance(zip_file, str):
             z_length = len(zip_file)
             if z_length > maxlength:
                 raise ValueError(toolong % (maxlength, z_length))
@@ -85,13 +85,13 @@ class Code(AWSProperty):
                 return
 
             # Get the length of the delimiter
-            if isinstance(delimiter, basestring):
+            if isinstance(delimiter, str):
                 d_length = len(delimiter)
             else:
                 d_length = 0
 
             # Get the length of each value that will be joined
-            v_lengths = [len(v) for v in values if isinstance(v, basestring)]
+            v_lengths = [len(v) for v in values if isinstance(v, str)]
 
             # Add all the lengths together
             z_length = sum(v_lengths)
@@ -133,13 +133,13 @@ class VPCConfig(AWSProperty):
 
 class OnFailure(AWSProperty):
     props = {
-        'Destination': (basestring, True),
+        'Destination': (str, True),
     }
 
 
 class OnSuccess(AWSProperty):
     props = {
-        'Destination': (basestring, True),
+        'Destination': (str, True),
     }
 
 
@@ -155,10 +155,10 @@ class EventInvokeConfig(AWSObject):
 
     props = {
         'DestinationConfig': (DestinationConfig, False),
-        'FunctionName': (basestring, True),
+        'FunctionName': (str, True),
         'MaximumEventAgeInSeconds': (integer, False),
         'MaximumRetryAttempts': (integer, False),
-        'Qualifier': (basestring, True),
+        'Qualifier': (str, True),
     }
 
 
@@ -170,20 +170,20 @@ class EventSourceMapping(AWSObject):
         'BisectBatchOnFunctionError': (boolean, False),
         'DestinationConfig': (DestinationConfig, False),
         'Enabled': (boolean, False),
-        'EventSourceArn': (basestring, True),
-        'FunctionName': (basestring, True),
+        'EventSourceArn': (str, True),
+        'FunctionName': (str, True),
         'MaximumBatchingWindowInSeconds': (integer, False),
         'MaximumRecordAgeInSeconds': (integer, False),
         'MaximumRetryAttempts': (integer, False),
         'ParallelizationFactor': (integer, False),
-        'StartingPosition': (basestring, False),
-        'Topics': ([basestring], False),
+        'StartingPosition': (str, False),
+        'Topics': ([str], False),
     }
 
 
 class DeadLetterConfig(AWSProperty):
     props = {
-        'TargetArn': (basestring, False),
+        'TargetArn': (str, False),
     }
 
 
@@ -195,14 +195,14 @@ class Environment(AWSProperty):
 
 class FileSystemConfig(AWSProperty):
     props = {
-        'Arn': (basestring, True),
-        'LocalMountPath': (basestring, True),
+        'Arn': (str, True),
+        'LocalMountPath': (str, True),
     }
 
 
 class TracingConfig(AWSProperty):
     props = {
-        'Mode': (basestring, False),
+        'Mode': (str, False),
     }
 
 
@@ -211,18 +211,18 @@ class Function(AWSObject):
 
     props = {
         'Code': (Code, True),
-        'Description': (basestring, False),
+        'Description': (str, False),
         'DeadLetterConfig': (DeadLetterConfig, False),
         'Environment': (Environment, False),
         'FileSystemConfigs': ([FileSystemConfig], False),
-        'FunctionName': (basestring, False),
-        'Handler': (basestring, True),
-        'KmsKeyArn': (basestring, False),
+        'FunctionName': (str, False),
+        'Handler': (str, True),
+        'KmsKeyArn': (str, False),
         'MemorySize': (validate_memory_size, False),
-        'Layers': ([basestring], False),
+        'Layers': ([str], False),
         'ReservedConcurrentExecutions': (positive_integer, False),
-        'Role': (basestring, True),
-        'Runtime': (basestring, True),
+        'Role': (str, True),
+        'Runtime': (str, True),
         'Tags': (Tags, False),
         'Timeout': (positive_integer, False),
         'TracingConfig': (TracingConfig, False),
@@ -234,19 +234,19 @@ class Permission(AWSObject):
     resource_type = "AWS::Lambda::Permission"
 
     props = {
-        'Action': (basestring, True),
-        'EventSourceToken': (basestring, False),
-        'FunctionName': (basestring, True),
-        'Principal': (basestring, True),
-        'SourceAccount': (basestring, False),
-        'SourceArn': (basestring, False),
+        'Action': (str, True),
+        'EventSourceToken': (str, False),
+        'FunctionName': (str, True),
+        'Principal': (str, True),
+        'SourceAccount': (str, False),
+        'SourceArn': (str, False),
     }
 
 
 class VersionWeight(AWSProperty):
 
     props = {
-        'FunctionVersion': (basestring, True),
+        'FunctionVersion': (str, True),
         'FunctionWeight': (float, True),
     }
 
@@ -269,10 +269,10 @@ class Alias(AWSObject):
     resource_type = "AWS::Lambda::Alias"
 
     props = {
-        'Description': (basestring, False),
-        'FunctionName': (basestring, True),
-        'FunctionVersion': (basestring, True),
-        'Name': (basestring, True),
+        'Description': (str, False),
+        'FunctionName': (str, True),
+        'FunctionVersion': (str, True),
+        'Name': (str, True),
         'ProvisionedConcurrencyConfig':
             (ProvisionedConcurrencyConfiguration, False),
         'RoutingConfig': (AliasRoutingConfiguration, False),
@@ -283,9 +283,9 @@ class Version(AWSObject):
     resource_type = "AWS::Lambda::Version"
 
     props = {
-        'CodeSha256': (basestring, False),
-        'Description': (basestring, False),
-        'FunctionName': (basestring, True),
+        'CodeSha256': (str, False),
+        'Description': (str, False),
+        'FunctionName': (str, True),
         'ProvisionedConcurrencyConfig':
             (ProvisionedConcurrencyConfiguration, False),
     }
@@ -293,9 +293,9 @@ class Version(AWSObject):
 
 class Content(AWSProperty):
     props = {
-        'S3Bucket': (basestring, True),
-        'S3Key': (basestring, True),
-        'S3ObjectVersion': (basestring, False),
+        'S3Bucket': (str, True),
+        'S3Key': (str, True),
+        'S3ObjectVersion': (str, False),
     }
 
 
@@ -303,11 +303,11 @@ class LayerVersion(AWSObject):
     resource_type = "AWS::Lambda::LayerVersion"
 
     props = {
-        'CompatibleRuntimes': ([basestring], False),
+        'CompatibleRuntimes': ([str], False),
         'Content': (Content, True),
-        'Description': (basestring, False),
-        'LayerName': (basestring, False),
-        'LicenseInfo': (basestring, False),
+        'Description': (str, False),
+        'LayerName': (str, False),
+        'LicenseInfo': (str, False),
     }
 
 
@@ -315,8 +315,8 @@ class LayerVersionPermission(AWSObject):
     resource_type = "AWS::Lambda::LayerVersionPermission"
 
     props = {
-        'Action': (basestring, True),
-        'LayerVersionArn': (basestring, True),
-        'OrganizationId': (basestring, False),
-        'Principal': (basestring, True),
+        'Action': (str, True),
+        'LayerVersionArn': (str, True),
+        'OrganizationId': (str, False),
+        'Principal': (str, True),
     }

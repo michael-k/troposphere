@@ -10,7 +10,7 @@ from .validators import (boolean, double)
 class LogSetup(AWSProperty):
     props = {
         'Enable': (bool, False),
-        'Types': ([basestring], False)
+        'Types': ([str], False)
         }
 
     def validate(self):
@@ -31,27 +31,27 @@ class Logging(AWSProperty):
 
 class Provider(AWSProperty):
     props = {
-        'KeyArn': (basestring, False),
+        'KeyArn': (str, False),
     }
 
 
 class EncryptionConfig(AWSProperty):
     props = {
         'Provider': (Provider, False),
-        'Resources': ([basestring], False),
+        'Resources': ([str], False),
     }
 
 
 class KubernetesNetworkConfig(AWSProperty):
     props = {
-        'ServiceIpv4Cidr': (basestring, False),
+        'ServiceIpv4Cidr': (str, False),
     }
 
 
 class ResourcesVpcConfig(AWSProperty):
     props = {
-        'SecurityGroupIds': ([basestring], False),
-        'SubnetIds': ([basestring], True),
+        'SecurityGroupIds': ([str], False),
+        'SubnetIds': ([str], True),
     }
 
 
@@ -61,25 +61,25 @@ class Cluster(AWSObject):
     props = {
         'EncryptionConfig': ([EncryptionConfig], False),
         'KubernetesNetworkConfig': (KubernetesNetworkConfig, False),
-        'Name': (basestring, False),
+        'Name': (str, False),
         'Logging': (Logging, False),
         'ResourcesVpcConfig': (ResourcesVpcConfig, True),
-        'RoleArn': (basestring, True),
-        'Version': (basestring, False),
+        'RoleArn': (str, True),
+        'Version': (str, False),
     }
 
 
 class Label(AWSProperty):
     props = {
-        'Key': (basestring, True),
-        'Value': (basestring, True),
+        'Key': (str, True),
+        'Value': (str, True),
     }
 
 
 class Selector(AWSProperty):
     props = {
         'Labels': ([Label], False),
-        'Namespace': (basestring, True),
+        'Namespace': (str, True),
     }
 
 
@@ -87,19 +87,19 @@ class FargateProfile(AWSObject):
     resource_type = "AWS::EKS::FargateProfile"
 
     props = {
-        'ClusterName': (basestring, True),
-        'FargateProfileName': (basestring, False),
-        'PodExecutionRoleArn': (basestring, True),
+        'ClusterName': (str, True),
+        'FargateProfileName': (str, False),
+        'PodExecutionRoleArn': (str, True),
         'Selectors': ([Selector], True),
-        'Subnets': ([basestring], False),
+        'Subnets': ([str], False),
         'Tags': (Tags, False),
     }
 
 
 class RemoteAccess(AWSProperty):
     props = {
-        'Ec2SshKey': (basestring, True),
-        'SourceSecurityGroups': ([basestring], False),
+        'Ec2SshKey': (str, True),
+        'SourceSecurityGroups': ([str], False),
     }
 
 
@@ -113,9 +113,9 @@ class ScalingConfig(AWSProperty):
 
 class LaunchTemplateSpecification(AWSProperty):
     props = {
-        'Id': (basestring, False),
-        'Name': (basestring, False),
-        'Version': (basestring, False),
+        'Id': (str, False),
+        'Name': (str, False),
+        'Version': (str, False),
     }
 
 
@@ -123,19 +123,19 @@ class Nodegroup(AWSObject):
     resource_type = "AWS::EKS::Nodegroup"
 
     props = {
-        'AmiType': (basestring, False),
-        'ClusterName': (basestring, True),
+        'AmiType': (str, False),
+        'ClusterName': (str, True),
         'DiskSize': (double, False),
         'ForceUpdateEnabled': (boolean, False),
-        'InstanceTypes': ([basestring], False),
+        'InstanceTypes': ([str], False),
         'Labels': (dict, False),
         'LaunchTemplate': (LaunchTemplateSpecification, False),
-        'NodegroupName': (basestring, False),
-        'NodeRole': (basestring, True),
-        'ReleaseVersion': (basestring, False),
+        'NodegroupName': (str, False),
+        'NodeRole': (str, True),
+        'ReleaseVersion': (str, False),
         'RemoteAccess': (RemoteAccess, False),
         'ScalingConfig': (ScalingConfig, False),
-        'Subnets': ([basestring], False),
+        'Subnets': ([str], False),
         'Tags': (dict, False),
-        'Version': (basestring, False),
+        'Version': (str, False),
     }

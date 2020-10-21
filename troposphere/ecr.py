@@ -4,8 +4,8 @@ from .compat import policytypes
 
 class LifecyclePolicy(AWSProperty):
     props = {
-        'LifecyclePolicyText': (basestring, False),
-        'RegistryId': (basestring, False),
+        'LifecyclePolicyText': (str, False),
+        'RegistryId': (str, False),
     }
 
 
@@ -14,9 +14,9 @@ class Repository(AWSObject):
 
     props = {
         'ImageScanningConfiguration': (dict, False),
-        'ImageTagMutability': (basestring, False),
+        'ImageTagMutability': (str, False),
         'LifecyclePolicy': (LifecyclePolicy, False),
-        'RepositoryName': (basestring, False),
+        'RepositoryName': (str, False),
         'RepositoryPolicyText': (policytypes, False),
         'Tags': (Tags, False),
     }

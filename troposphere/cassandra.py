@@ -31,14 +31,14 @@ class Keyspace(AWSObject):
     resource_type = "AWS::Cassandra::Keyspace"
 
     props = {
-        'KeyspaceName': (basestring, False),
+        'KeyspaceName': (str, False),
     }
 
 
 class Column(AWSProperty):
     props = {
-        "ColumnName": (basestring, True),
-        "ColumnType": (basestring, True),
+        "ColumnName": (str, True),
+        "ColumnType": (str, True),
     }
 
 
@@ -69,8 +69,8 @@ class Table(AWSObject):
     props = {
         "BillingMode": (BillingMode, False),
         "ClusteringKeyColumns": ([ClusteringKeyColumn], False),
-        "KeyspaceName": (basestring, True),
+        "KeyspaceName": (str, True),
         "PartitionKeyColumns": ([Column], True),
         "RegularColumns": ([Column], False),
-        "TableName": (basestring, False),
+        "TableName": (str, False),
     }

@@ -12,8 +12,8 @@ class Alias(AWSObject):
     resource_type = "AWS::KMS::Alias"
 
     props = {
-        'AliasName': (basestring, True),
-        'TargetKeyId': (basestring, True)
+        'AliasName': (str, True),
+        'TargetKeyId': (str, True)
     }
 
 
@@ -21,7 +21,7 @@ class Key(AWSObject):
     resource_type = "AWS::KMS::Key"
 
     props = {
-        'Description': (basestring, False),
+        'Description': (str, False),
         'Enabled': (boolean, False),
         'EnableKeyRotation': (boolean, False),
         'KeyPolicy': (policytypes, True),

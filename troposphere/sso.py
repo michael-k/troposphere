@@ -15,12 +15,12 @@ class Assignment(AWSObject):
     resource_type = "AWS::SSO::Assignment"
 
     props = {
-        'InstanceArn': (basestring, True),
-        'PermissionSetArn': (basestring, True),
-        'PrincipalId': (basestring, True),
-        'PrincipalType': (basestring, True),
-        'TargetId': (basestring, True),
-        'TargetType': (basestring, True),
+        'InstanceArn': (str, True),
+        'PermissionSetArn': (str, True),
+        'PrincipalId': (str, True),
+        'PrincipalType': (str, True),
+        'TargetId': (str, True),
+        'TargetType': (str, True),
     }
 
 
@@ -28,12 +28,12 @@ class PermissionSet(AWSObject):
     resource_type = "AWS::SSO::PermissionSet"
 
     props = {
-        'Description': (basestring, False),
-        'InlinePolicy': (basestring, False),
-        'InstanceArn': (basestring, True),
-        'ManagedPolicies': ([basestring], False),
-        'Name': (basestring, True),
-        'RelayStateType': (basestring, False),
-        'SessionDuration': (basestring, False),
+        'Description': (str, False),
+        'InlinePolicy': (str, False),
+        'InstanceArn': (str, True),
+        'ManagedPolicies': ([str], False),
+        'Name': (str, True),
+        'RelayStateType': (str, False),
+        'SessionDuration': (str, False),
         'Tags': (Tags, False),
     }

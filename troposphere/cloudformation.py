@@ -12,10 +12,10 @@ class Stack(AWSObject):
     resource_type = "AWS::CloudFormation::Stack"
 
     props = {
-        'NotificationARNs': ([basestring], False),
+        'NotificationARNs': ([str], False),
         'Parameters': (dict, False),
         'Tags': ((Tags, list), False),
-        'TemplateURL': (basestring, True),
+        'TemplateURL': (str, True),
         'TimeoutInMinutes': (integer, False),
     }
 
@@ -28,7 +28,7 @@ class CustomResource(AWSCustomObject):
     resource_type = "AWS::CloudFormation::CustomResource"
 
     props = {
-        'ServiceToken': (basestring, True)
+        'ServiceToken': (str, True)
     }
 
 
@@ -45,21 +45,21 @@ class OperationPreferences(AWSProperty):
         'FailureTolerancePercentage': (integer, False),
         'MaxConcurrentCount': (integer, False),
         'MaxConcurrentPercentage': (integer, False),
-        'RegionOrder': ([basestring], False),
+        'RegionOrder': ([str], False),
     }
 
 
 class Parameter(AWSProperty):
     props = {
-        'ParameterKey': (basestring, True),
-        'ParameterValue': (basestring, True),
+        'ParameterKey': (str, True),
+        'ParameterValue': (str, True),
     }
 
 
 class DeploymentTargets(AWSProperty):
     props = {
-        'Accounts': ([basestring], False),
-        'OrganizationalUnitIds': ([basestring], False),
+        'Accounts': ([str], False),
+        'OrganizationalUnitIds': ([str], False),
     }
 
 
@@ -67,7 +67,7 @@ class StackInstances(AWSProperty):
     props = {
         'DeploymentTargets': (DeploymentTargets, True),
         'ParameterOverrides': ([Parameter], False),
-        'Regions': ([basestring], True),
+        'Regions': ([str], True),
     }
 
 
@@ -75,19 +75,19 @@ class StackSet(AWSObject):
     resource_type = "AWS::CloudFormation::StackSet"
 
     props = {
-        'AdministrationRoleARN': (basestring, False),
+        'AdministrationRoleARN': (str, False),
         'AutoDeployment': (AutoDeployment, False),
-        'Capabilities': ([basestring], False),
-        'Description': (basestring, False),
-        'ExecutionRoleName': (basestring, False),
+        'Capabilities': ([str], False),
+        'Description': (str, False),
+        'ExecutionRoleName': (str, False),
         'OperationPreferences': (OperationPreferences, False),
         'Parameters': ([Parameter], False),
-        'PermissionModel': (basestring, False),
+        'PermissionModel': (str, False),
         'StackInstancesGroup': ([StackInstances], False),
-        'StackSetName': (basestring, False),
+        'StackSetName': (str, False),
         'Tags': (Tags, False),
-        'TemplateBody': (basestring, False),
-        'TemplateURL': (basestring, False),
+        'TemplateBody': (str, False),
+        'TemplateURL': (str, False),
     }
 
 
@@ -96,13 +96,13 @@ class WaitCondition(AWSObject):
 
     props = {
         'Count': (integer, False),
-        'Handle': (basestring, False),
+        'Handle': (str, False),
         'Timeout': (integer, False),
     }
 
     def validate(self):
         if 'CreationPolicy' in self.resource:
-            for k in self.props.keys():
+            for k in list(self.props.keys()):
                 if k in self.properties:
                     raise ValueError(
                         "Property %s cannot be specified with CreationPolicy" %
@@ -126,7 +126,7 @@ class Metadata(AWSHelperFn):
     def to_dict(self):
         t = []
         for i in self.data:
-            t += encode_to_dict(i).items()
+            t += list(encode_to_dict(i).items())
         return dict(t)
 
 
@@ -137,13 +137,13 @@ class InitFileContext(AWSHelperFn):
 
 class InitFile(AWSProperty):
     props = {
-        'content': (basestring, False),
-        'mode': (basestring, False),
-        'owner': (basestring, False),
+        'content': (str, False),
+        'mode': (str, False),
+        'owner': (str, False),
         'encoding': (encoding, False),
-        'group': (basestring, False),
-        'source': (basestring, False),
-        'authentication': (basestring, False),
+        'group': (str, False),
+        'source': (str, False),
+        'authentication': (str, False),
         'context': (InitFileContext, False)
     }
 
@@ -189,7 +189,7 @@ class InitConfigSets(AWSHelperFn):
         self.data = kwargs
 
     def validate(self, config_sets):
-        for k, v in config_sets.iteritems():
+        for k, v in config_sets.items():
             if not isinstance(v, list):
                 raise ValueError('configSets values must be of type list')
 
@@ -215,14 +215,14 @@ def validate_authentication_type(auth_type):
 
 class AuthenticationBlock(AWSProperty):
     props = {
-        "accessKeyId": (basestring, False),
-        "buckets": ([basestring], False),
-        "password": (basestring, False),
-        "secretKey": (basestring, False),
+        "accessKeyId": (str, False),
+        "buckets": ([str], False),
+        "password": (str, False),
+        "secretKey": (str, False),
         "type": (validate_authentication_type, False),
-        "uris": ([basestring], False),
-        "username": (basestring, False),
-        "roleName": (basestring, False)
+        "uris": ([str], False),
+        "username": (str, False),
+        "roleName": (str, False)
     }
 
 
@@ -232,7 +232,7 @@ class Authentication(AWSHelperFn):
         self.data = {"AWS::CloudFormation::Authentication": data}
 
     def validate(self, data):
-        for k, v in data.iteritems():
+        for k, v in data.items():
             if not isinstance(v, AuthenticationBlock):
                 raise ValueError(
                     'authentication block must be of type'
@@ -254,7 +254,7 @@ class Init(AWSHelperFn):
 
     def validate(self, data, config_sets):
         if isinstance(data, InitConfigSets):
-            for k, v in sorted(config_sets.iteritems()):
+            for k, v in sorted(config_sets.items()):
                 if not isinstance(v, InitConfig):
                     raise ValueError(
                         'init configs must of type ',
@@ -273,9 +273,9 @@ class Macro(AWSCustomObject):
     resource_type = "AWS::CloudFormation::Macro"
 
     props = {
-        'Description': (basestring, False),
-        'FunctionName': (basestring, True),
-        'LogGroupName': (basestring, False),
-        'LogRoleARN': (basestring, False),
-        'Name': (basestring, True),
+        'Description': (str, False),
+        'FunctionName': (str, True),
+        'LogGroupName': (str, False),
+        'LogRoleARN': (str, False),
+        'Name': (str, True),
     }

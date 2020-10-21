@@ -16,67 +16,67 @@ class Certificate(AWSObject):
     resource_type = "AWS::DMS::Certificate"
 
     props = {
-        'CertificateIdentifier': (basestring, False),
-        'CertificatePem': (basestring, False),
-        'CertificateWallet': (basestring, False),
+        'CertificateIdentifier': (str, False),
+        'CertificatePem': (str, False),
+        'CertificateWallet': (str, False),
     }
 
 
 class DynamoDbSettings(AWSProperty):
     props = {
-        'ServiceAccessRoleArn': (basestring, False),
+        'ServiceAccessRoleArn': (str, False),
     }
 
 
 class ElasticsearchSettings(AWSProperty):
     props = {
-        'EndpointUri': (basestring, False),
+        'EndpointUri': (str, False),
         'ErrorRetryDuration': (integer, False),
         'FullLoadErrorPercentage': (integer, False),
-        'ServiceAccessRoleArn': (basestring, False),
+        'ServiceAccessRoleArn': (str, False),
     }
 
 
 class KinesisSettings(AWSProperty):
     props = {
-        'MessageFormat': (basestring, False),
-        'ServiceAccessRoleArn': (basestring, False),
-        'StreamArn': (basestring, False),
+        'MessageFormat': (str, False),
+        'ServiceAccessRoleArn': (str, False),
+        'StreamArn': (str, False),
     }
 
 
 class MongoDbSettings(AWSProperty):
     props = {
-        'AuthMechanism': (basestring, False),
-        'AuthSource': (basestring, False),
-        'AuthType': (basestring, False),
-        'DatabaseName': (basestring, False),
-        'DocsToInvestigate': (basestring, False),
-        'ExtractDocId': (basestring, False),
-        'NestingLevel': (basestring, False),
-        'Password': (basestring, False),
+        'AuthMechanism': (str, False),
+        'AuthSource': (str, False),
+        'AuthType': (str, False),
+        'DatabaseName': (str, False),
+        'DocsToInvestigate': (str, False),
+        'ExtractDocId': (str, False),
+        'NestingLevel': (str, False),
+        'Password': (str, False),
         'Port': (network_port, False),
-        'ServerName': (basestring, False),
-        'Username': (basestring, False),
+        'ServerName': (str, False),
+        'Username': (str, False),
     }
 
 
 class S3Settings(AWSProperty):
     props = {
-        'BucketFolder': (basestring, False),
-        'BucketName': (basestring, False),
-        'CompressionType': (basestring, False),
-        'CsvDelimiter': (basestring, False),
-        'CsvRowDelimiter': (basestring, False),
-        'ExternalTableDefinition': (basestring, False),
-        'ServiceAccessRoleArn': (basestring, False),
+        'BucketFolder': (str, False),
+        'BucketName': (str, False),
+        'CompressionType': (str, False),
+        'CsvDelimiter': (str, False),
+        'CsvRowDelimiter': (str, False),
+        'ExternalTableDefinition': (str, False),
+        'ServiceAccessRoleArn': (str, False),
     }
 
 
 class KafkaSettings(AWSProperty):
     props = {
-        'Broker': (basestring, False),
-        'Topic': (basestring, False),
+        'Broker': (str, False),
+        'Topic': (str, False),
     }
 
 
@@ -86,9 +86,9 @@ class NeptuneSettings(AWSProperty):
         'IamAuthEnabled': (boolean, False),
         'MaxFileSize': (integer, False),
         'MaxRetryCount': (integer, False),
-        'S3BucketFolder': (basestring, False),
-        'S3BucketName': (basestring, False),
-        'ServiceAccessRoleArn': (basestring, False),
+        'S3BucketFolder': (str, False),
+        'S3BucketName': (str, False),
+        'ServiceAccessRoleArn': (str, False),
     }
 
 
@@ -96,26 +96,26 @@ class Endpoint(AWSObject):
     resource_type = "AWS::DMS::Endpoint"
 
     props = {
-        'CertificateArn': (basestring, False),
-        'DatabaseName': (basestring, False),
+        'CertificateArn': (str, False),
+        'DatabaseName': (str, False),
         'DynamoDbSettings': (DynamoDbSettings, False),
         'ElasticsearchSettings': (ElasticsearchSettings, False),
-        'EndpointIdentifier': (basestring, False),
-        'EndpointType': (basestring, True),
-        'EngineName': (basestring, True),
-        'ExtraConnectionAttributes': (basestring, False),
+        'EndpointIdentifier': (str, False),
+        'EndpointType': (str, True),
+        'EngineName': (str, True),
+        'ExtraConnectionAttributes': (str, False),
         'KafkaSettings': (KafkaSettings, False),
         'KinesisSettings': (KinesisSettings, False),
-        'KmsKeyId': (basestring, False),
+        'KmsKeyId': (str, False),
         'MongoDbSettings': (MongoDbSettings, False),
         'NeptuneSettings': (NeptuneSettings, False),
-        'Password': (basestring, False),
+        'Password': (str, False),
         'Port': (network_port, False),
         'S3Settings': (S3Settings, False),
-        'ServerName': (basestring, False),
-        'SslMode': (basestring, False),
+        'ServerName': (str, False),
+        'SslMode': (str, False),
         'Tags': (Tags, False),
-        'Username': (basestring, False),
+        'Username': (str, False),
     }
 
 
@@ -124,11 +124,11 @@ class EventSubscription(AWSObject):
 
     props = {
         'Enabled': (boolean, False),
-        'EventCategories': ([basestring], False),
-        'SnsTopicArn': (basestring, True),
-        'SourceIds': ([basestring], False),
-        'SourceType': (basestring, False),
-        'SubscriptionName': (basestring, False),
+        'EventCategories': ([str], False),
+        'SnsTopicArn': (str, True),
+        'SourceIds': ([str], False),
+        'SourceType': (str, False),
+        'SubscriptionName': (str, False),
         'Tags': (Tags, False),
     }
 
@@ -140,17 +140,17 @@ class ReplicationInstance(AWSObject):
         'AllocatedStorage': (integer, False),
         'AllowMajorVersionUpgrade': (boolean, False),
         'AutoMinorVersionUpgrade': (boolean, False),
-        'AvailabilityZone': (basestring, False),
-        'EngineVersion': (basestring, False),
-        'KmsKeyId': (basestring, False),
+        'AvailabilityZone': (str, False),
+        'EngineVersion': (str, False),
+        'KmsKeyId': (str, False),
         'MultiAZ': (boolean, False),
-        'PreferredMaintenanceWindow': (basestring, False),
+        'PreferredMaintenanceWindow': (str, False),
         'PubliclyAccessible': (boolean, False),
-        'ReplicationInstanceClass': (basestring, True),
-        'ReplicationInstanceIdentifier': (basestring, False),
-        'ReplicationSubnetGroupIdentifier': (basestring, False),
+        'ReplicationInstanceClass': (str, True),
+        'ReplicationInstanceIdentifier': (str, False),
+        'ReplicationSubnetGroupIdentifier': (str, False),
         'Tags': (Tags, False),
-        'VpcSecurityGroupIds': ([basestring], False),
+        'VpcSecurityGroupIds': ([str], False),
     }
 
 
@@ -158,9 +158,9 @@ class ReplicationSubnetGroup(AWSObject):
     resource_type = "AWS::DMS::ReplicationSubnetGroup"
 
     props = {
-        'ReplicationSubnetGroupDescription': (basestring, True),
-        'ReplicationSubnetGroupIdentifier': (basestring, False),
-        'SubnetIds': ([basestring], True),
+        'ReplicationSubnetGroupDescription': (str, True),
+        'ReplicationSubnetGroupIdentifier': (str, False),
+        'SubnetIds': ([str], True),
         'Tags': (Tags, False),
     }
 
@@ -169,16 +169,16 @@ class ReplicationTask(AWSObject):
     resource_type = "AWS::DMS::ReplicationTask"
 
     props = {
-        'CdcStartPosition': (basestring, False),
+        'CdcStartPosition': (str, False),
         'CdcStartTime': (positive_integer, False),
-        'CdcStopPosition': (basestring, False),
-        'MigrationType': (basestring, True),
-        'ReplicationInstanceArn': (basestring, True),
-        'ReplicationTaskIdentifier': (basestring, False),
-        'ReplicationTaskSettings': (basestring, False),
-        'SourceEndpointArn': (basestring, True),
-        'TableMappings': (basestring, True),
+        'CdcStopPosition': (str, False),
+        'MigrationType': (str, True),
+        'ReplicationInstanceArn': (str, True),
+        'ReplicationTaskIdentifier': (str, False),
+        'ReplicationTaskSettings': (str, False),
+        'SourceEndpointArn': (str, True),
+        'TableMappings': (str, True),
         'Tags': (Tags, False),
-        'TargetEndpointArn': (basestring, True),
-        'TaskData': (basestring, False),
+        'TargetEndpointArn': (str, True),
+        'TaskData': (str, False),
     }

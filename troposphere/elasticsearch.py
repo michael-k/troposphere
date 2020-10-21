@@ -33,9 +33,9 @@ def validate_tls_security_policy(tls_security_policy):
 class CognitoOptions(AWSProperty):
     props = {
         'Enabled': (boolean, False),
-        'IdentityPoolId': (basestring, False),
-        'RoleArn': (basestring, False),
-        'UserPoolId': (basestring, False),
+        'IdentityPoolId': (str, False),
+        'RoleArn': (str, False),
+        'UserPoolId': (str, False),
     }
 
 
@@ -71,9 +71,9 @@ class ElasticsearchClusterConfig(AWSProperty):
     props = {
         'DedicatedMasterCount': (integer, False),
         'DedicatedMasterEnabled': (boolean, False),
-        'DedicatedMasterType': (basestring, False),
+        'DedicatedMasterType': (str, False),
         'InstanceCount': (integer, False),
-        'InstanceType': (basestring, False),
+        'InstanceType': (str, False),
         'ZoneAwarenessConfig': (ZoneAwarenessConfig, False),
         'ZoneAwarenessEnabled': (boolean, False)
     }
@@ -82,7 +82,7 @@ class ElasticsearchClusterConfig(AWSProperty):
 class EncryptionAtRestOptions(AWSProperty):
     props = {
         'Enabled': (boolean, False),
-        'KmsKeyId': (basestring, False),
+        'KmsKeyId': (str, False),
     }
 
 
@@ -100,16 +100,16 @@ class SnapshotOptions(AWSProperty):
 
 class VPCOptions(AWSProperty):
     props = {
-        'SecurityGroupIds': ([basestring], False),
-        'SubnetIds': ([basestring], False)
+        'SecurityGroupIds': ([str], False),
+        'SubnetIds': ([str], False)
     }
 
 
 class MasterUserOptions(AWSProperty):
     props = {
-        'MasterUserARN': (basestring, False),
-        'MasterUserName': (basestring, False),
-        'MasterUserPassword': (basestring, False),
+        'MasterUserARN': (str, False),
+        'MasterUserName': (str, False),
+        'MasterUserPassword': (str, False),
     }
 
 
@@ -129,11 +129,11 @@ class Domain(AWSObject):
         'AdvancedOptions': (dict, False),
         'AdvancedSecurityOptions': (AdvancedSecurityOptionsInput, False),
         'CognitoOptions': (CognitoOptions, False),
-        'DomainName': (basestring, False),
+        'DomainName': (str, False),
         'DomainEndpointOptions': (DomainEndpointOptions, False),
         'EBSOptions': (EBSOptions, False),
         'ElasticsearchClusterConfig': (ElasticsearchClusterConfig, False),
-        'ElasticsearchVersion': (basestring, False),
+        'ElasticsearchVersion': (str, False),
         'EncryptionAtRestOptions': (EncryptionAtRestOptions, False),
         'LogPublishingOptions': (dict, False),
         'NodeToNodeEncryptionOptions': (NodeToNodeEncryptionOptions, False),
