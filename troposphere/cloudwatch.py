@@ -19,7 +19,7 @@ from .validators.cloudwatch import (
 
 class MetricDimension(AWSProperty):
     """
-    `MetricDimension <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-dimension.html>`__
+    `MetricDimension <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-dimension.html>`__
     """
 
     props: PropsDictType = {
@@ -71,7 +71,7 @@ class MetricDataQuery(AWSProperty):
 
 class Alarm(AWSObject):
     """
-    `Alarm <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html>`__
+    `Alarm <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-alarm.html>`__
     """
 
     resource_type = "AWS::CloudWatch::Alarm"
@@ -226,6 +226,28 @@ class MetricStreamFilter(AWSProperty):
     }
 
 
+class MetricStreamStatisticsMetric(AWSProperty):
+    """
+    `MetricStreamStatisticsMetric <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-metricstream-metricstreamstatisticsmetric.html>`__
+    """
+
+    props: PropsDictType = {
+        "MetricName": (str, True),
+        "Namespace": (str, True),
+    }
+
+
+class MetricStreamStatisticsConfiguration(AWSProperty):
+    """
+    `MetricStreamStatisticsConfiguration <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-metricstream-metricstreamstatisticsconfiguration.html>`__
+    """
+
+    props: PropsDictType = {
+        "AdditionalStatistics": ([str], True),
+        "IncludeMetrics": ([MetricStreamStatisticsMetric], True),
+    }
+
+
 class MetricStream(AWSObject):
     """
     `MetricStream <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-metricstream.html>`__
@@ -240,5 +262,6 @@ class MetricStream(AWSObject):
         "Name": (str, False),
         "OutputFormat": (str, True),
         "RoleArn": (str, True),
+        "StatisticsConfigurations": ([MetricStreamStatisticsConfiguration], False),
         "Tags": (Tags, False),
     }
