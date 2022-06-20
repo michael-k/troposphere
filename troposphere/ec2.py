@@ -586,6 +586,7 @@ class EIP(AWSObject):
     props: PropsDictType = {
         "Domain": (str, False),
         "InstanceId": (str, False),
+        "NetworkBorderGroup": (str, False),
         "PublicIpv4Pool": (str, False),
         "Tags": (Tags, False),
     }
@@ -910,6 +911,7 @@ class NetworkInterfaceProperty(AWSProperty):
     """
 
     props: PropsDictType = {
+        "AssociateCarrierIpAddress": (boolean, False),
         "AssociatePublicIpAddress": (boolean, False),
         "DeleteOnTermination": (boolean, False),
         "Description": (str, False),
@@ -1019,6 +1021,21 @@ class InternetGateway(AWSObject):
 
     props: PropsDictType = {
         "Tags": (validate_tags_or_list, False),
+    }
+
+
+class KeyPair(AWSObject):
+    """
+    `KeyPair <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-keypair.html>`__
+    """
+
+    resource_type = "AWS::EC2::KeyPair"
+
+    props: PropsDictType = {
+        "KeyName": (str, True),
+        "KeyType": (str, False),
+        "PublicKeyMaterial": (str, False),
+        "Tags": (Tags, False),
     }
 
 
@@ -1334,6 +1351,7 @@ class LaunchTemplateData(AWSProperty):
         "CapacityReservationSpecification": (CapacityReservationSpecification, False),
         "CpuOptions": (CpuOptions, False),
         "CreditSpecification": (LaunchTemplateCreditSpecification, False),
+        "DisableApiStop": (boolean, False),
         "DisableApiTermination": (boolean, False),
         "EbsOptimized": (boolean, False),
         "ElasticGpuSpecifications": ([ElasticGpuSpecification], False),
@@ -2182,6 +2200,7 @@ class TrafficMirrorTarget(AWSObject):
 
     props: PropsDictType = {
         "Description": (str, False),
+        "GatewayLoadBalancerEndpointId": (str, False),
         "NetworkInterfaceId": (str, False),
         "NetworkLoadBalancerArn": (str, False),
         "Tags": (Tags, False),
@@ -2219,6 +2238,7 @@ class TransitGatewayAttachment(AWSObject):
     resource_type = "AWS::EC2::TransitGatewayAttachment"
 
     props: PropsDictType = {
+        "Options": (dict, False),
         "SubnetIds": ([str], True),
         "Tags": (validate_tags_or_list, False),
         "TransitGatewayId": (str, True),
@@ -2402,7 +2422,7 @@ class VPC(AWSObject):
     resource_type = "AWS::EC2::VPC"
 
     props: PropsDictType = {
-        "CidrBlock": (str, True),
+        "CidrBlock": (str, False),
         "EnableDnsHostnames": (boolean, False),
         "EnableDnsSupport": (boolean, False),
         "InstanceTenancy": (instance_tenancy, False),
@@ -2585,7 +2605,7 @@ class VPNConnectionRoute(AWSObject):
 
 class VPNGateway(AWSObject):
     """
-    `VPNGateway <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpn-gateway.html>`__
+    `VPNGateway <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpngateway.html>`__
     """
 
     resource_type = "AWS::EC2::VPNGateway"
@@ -2735,6 +2755,22 @@ class SecurityGroupRule(AWSProperty):
         "SourceSecurityGroupName": (str, False),
         "SourceSecurityGroupOwnerId": (str, False),
         "ToPort": (validate_network_port, False),
+    }
+
+
+class TransitGatewayRouteTableRoute(AWSProperty):
+    """
+    `TransitGatewayRouteTableRoute <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkinsightsanalysis-transitgatewayroutetableroute.html>`__
+    """
+
+    props: PropsDictType = {
+        "AttachmentId": (str, False),
+        "DestinationCidr": (str, False),
+        "PrefixListId": (str, False),
+        "ResourceId": (str, False),
+        "ResourceType": (str, False),
+        "RouteOrigin": (str, False),
+        "State": (str, False),
     }
 
 
