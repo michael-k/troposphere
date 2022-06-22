@@ -197,7 +197,7 @@ class DBInstance(AWSObject):
 
 class DBParameterGroup(AWSObject):
     """
-    `DBParameterGroup <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbparametergroup.html>`__
+    `DBParameterGroup <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbparametergroup.html>`__
     """
 
     resource_type = "AWS::RDS::DBParameterGroup"
@@ -341,7 +341,7 @@ class DBSecurityGroupIngress(AWSObject):
 
 class DBSubnetGroup(AWSObject):
     """
-    `DBSubnetGroup <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbsubnet-group.html>`__
+    `DBSubnetGroup <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbsubnetgroup.html>`__
     """
 
     resource_type = "AWS::RDS::DBSubnetGroup"
@@ -367,6 +367,8 @@ class EventSubscription(AWSObject):
         "SnsTopicArn": (str, True),
         "SourceIds": ([str], False),
         "SourceType": (str, False),
+        "SubscriptionName": (str, False),
+        "Tags": (Tags, False),
     }
 
 

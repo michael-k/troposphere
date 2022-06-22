@@ -46,8 +46,11 @@ class LocationEFS(AWSObject):
     resource_type = "AWS::DataSync::LocationEFS"
 
     props: PropsDictType = {
+        "AccessPointArn": (str, False),
         "Ec2Config": (Ec2Config, True),
         "EfsFilesystemArn": (str, True),
+        "FileSystemAccessRoleArn": (str, False),
+        "InTransitEncryption": (str, False),
         "Subdirectory": (str, False),
         "Tags": (Tags, False),
     }
@@ -291,6 +294,7 @@ class Options(AWSProperty):
         "Gid": (str, False),
         "LogLevel": (str, False),
         "Mtime": (str, False),
+        "ObjectTags": (str, False),
         "OverwriteMode": (str, False),
         "PosixPermissions": (str, False),
         "PreserveDeletedFiles": (str, False),
