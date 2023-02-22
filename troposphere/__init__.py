@@ -32,31 +32,32 @@ import cfn_flip  # type: ignore
 from . import validators
 
 if TYPE_CHECKING:
+    from .type_defs.compat import Final
     from .type_defs.protocols import JSONreprProtocol, ToDictProtocol
 
 __version__ = "4.3.0"
 
 # constants for DeletionPolicy and UpdateReplacePolicy
-Delete = "Delete"
-Retain = "Retain"
-Snapshot = "Snapshot"
+Delete: Final = "Delete"
+Retain: Final = "Retain"
+Snapshot: Final = "Snapshot"
 
 # Pseudo Parameters
-AWS_ACCOUNT_ID = "AWS::AccountId"
-AWS_NOTIFICATION_ARNS = "AWS::NotificationARNs"
-AWS_NO_VALUE = "AWS::NoValue"
-AWS_PARTITION = "AWS::Partition"
-AWS_REGION = "AWS::Region"
-AWS_STACK_ID = "AWS::StackId"
-AWS_STACK_NAME = "AWS::StackName"
-AWS_URL_SUFFIX = "AWS::URLSuffix"
+AWS_ACCOUNT_ID: Final = "AWS::AccountId"
+AWS_NOTIFICATION_ARNS: Final = "AWS::NotificationARNs"
+AWS_NO_VALUE: Final = "AWS::NoValue"
+AWS_PARTITION: Final = "AWS::Partition"
+AWS_REGION: Final = "AWS::Region"
+AWS_STACK_ID: Final = "AWS::StackId"
+AWS_STACK_NAME: Final = "AWS::StackName"
+AWS_URL_SUFFIX: Final = "AWS::URLSuffix"
 
 # Template Limits
-MAX_MAPPINGS = 200
-MAX_OUTPUTS = 200
-MAX_PARAMETERS = 200
-MAX_RESOURCES = 500
-PARAMETER_TITLE_MAX = 255
+MAX_MAPPINGS: Final = 200
+MAX_OUTPUTS: Final = 200
+MAX_PARAMETERS: Final = 200
+MAX_RESOURCES: Final = 500
+PARAMETER_TITLE_MAX: Final = 255
 
 
 valid_names = re.compile(r"^[a-zA-Z0-9]+$")
@@ -620,14 +621,14 @@ PropsDictType = Dict[
 ]
 
 # Pseudo Parameter Ref's
-AccountId = Ref(AWS_ACCOUNT_ID)
-NotificationARNs = Ref(AWS_NOTIFICATION_ARNS)
-NoValue = Ref(AWS_NO_VALUE)
-Partition = Ref(AWS_PARTITION)
-Region = Ref(AWS_REGION)
-StackId = Ref(AWS_STACK_ID)
-StackName = Ref(AWS_STACK_NAME)
-URLSuffix = Ref(AWS_URL_SUFFIX)
+AccountId: Final = Ref(AWS_ACCOUNT_ID)
+NotificationARNs: Final = Ref(AWS_NOTIFICATION_ARNS)
+NoValue: Final = Ref(AWS_NO_VALUE)
+Partition: Final = Ref(AWS_PARTITION)
+Region: Final = Ref(AWS_REGION)
+StackId: Final = Ref(AWS_STACK_ID)
+StackName: Final = Ref(AWS_STACK_NAME)
+URLSuffix: Final = Ref(AWS_URL_SUFFIX)
 
 
 class Condition(AWSHelperFn):
